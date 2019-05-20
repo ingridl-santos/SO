@@ -2,11 +2,16 @@
     Arthur Bindá
     Eduardo Lopes
     Ingrid Santos
+
+    gcc leitorEscritor.cpp -o leitorEscritor -lpthread 
+    ./leitorEscritor
 */
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <time.h>
+#include <errno.h>
 
 #define READERS    20       //quantidade de leitores
 #define WRITERS    3        //quantidade de escritores
@@ -57,79 +62,71 @@ while(1)            //repete eternamente
     }
 }
 
-void read_data_base()
-{
+void read_data_base() {
+    /*quanto tempo o leitor permanecerá lendo a base de dados*/
+    int readingtime;
+    readingtime = rand() % 3;
 
-/*quanto tempo o leitor permanecerá lendo a base de dados*/
-int readingtime;
-readingtime = rand() % 3;
-
-printf("Usuário lendo banco de dados. Total de %d leitores lendo agora.\n",rc);
-sleep(readingtime);
+    printf("Usuário lendo banco de dados. Total de %d leitores lendo agora.\n",rc);
+    nanosleep(readingtime);
 }
-void use_data_read()
-{
+void use_data_read() {
 
-/*quanto tempo o leitor permanecerá utilizando os dados lidos*/
-int usetime;
-usetime = rand() % 20;
+    /*quanto tempo o leitor permanecerá utilizando os dados lidos*/
+    int usetime;
+    usetime = rand() % 20;
 
-printf("Usuário utilizando conhecimento adquirido no banco de dados\n");
-sleep(usetime);
+    printf("Usuário utilizando conhecimento adquirido no banco de dados\n");
+    nanosleep(usetime);
 }
-void think_up_data()
-{
+void think_up_data() {
 
-/*quanto tempo o escritor gasta pensando no que irá escrever*/
-int thinktime;
-thinktime = rand() % 10;
+    /*quanto tempo o escritor gasta pensando no que irá escrever*/
+    int thinktime;
+    thinktime = rand() % 10;
 
-printf("Escritor pensando no que irá escrever\n");
-sleep(thinktime);
+    printf("Escritor pensando no que irá escrever\n");
+    nanosleep(thinktime);
 }
-void write_data_base()
-{
+void write_data_base() {
 
-/*quanto tempo o escritor gasta escrevendo na base de dados*/
-int writetime;
-writetime = rand() % 6;
+    /*quanto tempo o escritor gasta escrevendo na base de dados*/
+    int writetime;
+    writetime = rand() % 6;
 
-printf("Escritor escrevendo no banco de dados\n");
-sleep(writetime);
+    printf("Escritor escrevendo no banco de dados\n");
+    nanosleep(writetime);
 }
 
 
 /////MAIN FUNCTION///////////////////////////////
-main()
-{
+main() {
 
-pthread_t writerthreads[WRITERS], readerthreads[READERS]; 
-int i;
+    pthread_t writerthreads[WRITERS], readerthreads[READERS]; 
+    int i;
 
-//inicializacao dos semaforos...
+    //inicializacao dos semaforos...
     pthread_mutex_init(&db, NULL);
-pthread_mutex_init(&mutex, NULL);
+    pthread_mutex_init(&mutex, NULL);
 
 
-//criação das threads independentes de escritores...
+    //criação das threads independentes de escritores...
     for(i=0;i<WRITERS;i++){
-    pthread_create( &writerthreads[i], NULL,(void *) writer, NULL);
-}
+        pthread_create( &writerthreads[i], NULL,(void *) writer, NULL);
+    }
 
-//criação das threads independentes de leitores...
+    //criação das threads independentes de leitores...
     for(i=0;i<READERS;i++){
-    pthread_create( &readerthreads[i], NULL,(void *) reader, NULL);
-}
+        pthread_create( &readerthreads[i], NULL,(void *) reader, NULL);
+    }
 
 
-for(i=0;i<WRITERS;i++){
-    pthread_join(writerthreads[i], NULL);
-}
+    for(i=0;i<WRITERS;i++){
+        pthread_join(writerthreads[i], NULL);
+    }
 
-for(i=0;i<READERS;i++){
-    pthread_join(readerthreads[i], NULL);
-}
-
-
-exit(0);
+    for(i=0;i<READERS;i++){
+        pthread_join(readerthreads[i], NULL);
+    }
+    exit(0);
 }
