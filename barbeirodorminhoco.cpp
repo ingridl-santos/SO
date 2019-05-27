@@ -2,6 +2,8 @@
     Arthur Bindá
     Eduardo Lopes
     Ingrid Santos
+
+    Fonte: http://www.ic.unicamp.br/~islene/2s2007-mo806/barbeiro/barbeiro.pdf
 */
 #include <pthread.h>
 #include <semaphore.h>
@@ -14,7 +16,7 @@
 #define N_BARBEIROS 2
 
 sem_t sem_cadeiras;
-sem_t sem_cad_barbeiro[N_BARBEIROS]; 
+sem_t sem_cad_barbeiro[N_BARBEIROS];
 sem_t sem_corte_cabelo[N_BARBEIROS];
 sem_t sem_cliente_cadeira[N_BARBEIROS];
 
