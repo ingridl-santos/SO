@@ -1,5 +1,6 @@
-// Ingrid Santos e João Alberto
-// TP - Banheiro
+/* 	TP SO 2018/1 - Banheiro 
+	Ingrid Santos e João Alberto
+ */
 #include "stdio.h"
 #include "unistd.h"
 #include "stdlib.h"
