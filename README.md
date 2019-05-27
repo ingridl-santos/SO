@@ -1,4 +1,4 @@
-# Sistemas Operarionais
+# Sistemas Operacionais
 
   Trabalhos Práticos
   
