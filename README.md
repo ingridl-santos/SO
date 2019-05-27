@@ -62,7 +62,7 @@ Saída
 
 Entrada
 
-        A primeira linha de um conjunto de teste contém um número inteiro não negativo, M, 
+        A primeira linha de um conjunto de teste contém um número inteiro não negativo, M,
         que indica o valor do quantum a ser utilizado no escalonamento dos processos. Após a
         primeira linha, seu programa deve ler vários conjuntos de teste. Assim, a segunda
         linha contém um número inteiro não negativo, N, que indica o número de processos a
@@ -104,20 +104,20 @@ Saída
 
 Neste trabalho, vocês farão o seu próprio alocador de memória, com um gerente de memória livre.
 
-Ele será bem simples: No início pedirá um valor N, e alocará N bytes com malloc mesmo. A partir daí, quem usar o alocador poderá pedir memória desta previamente alocada. Desta forma, cabe a ele gerenciar o espaço livre nesta memória, cuidar da segurança (tamanho/número mágico) e a política para escolher onde fazer cada alocação.
+No início pedirá um valor N, e alocará N bytes com malloc mesmo. A partir daí, quem usar o alocador poderá pedir memória desta previamente alocada. Desta forma, cabe a ele gerenciar o espaço livre nesta memória, cuidar da segurança (tamanho/número mágico) e a política para escolher onde fazer cada alocação.
 
-O alocador deve ter as seguintes funções implementadas:
+        O alocador deve ter as seguintes funções implementadas:
 
-__Construtor*__, que recebe o tamanho da memória a ser alocada e uma constante que diz qual a política de alocação (ver código)  
+        Construtor*, que recebe o tamanho da memória a ser alocada e uma constante que diz qual a política de alocação (ver código)  
 
-__Aloca__, que recebe um tamanho e retorna um ponteiro para a posição de memória deste tamanho que passe a ser utilizada.
+        Aloca, que recebe um tamanho e retorna um ponteiro para a posição de memória deste tamanho que passe a ser utilizada.
 
-__Verifica__, que recebe um ponteiro e um offset, e verifica se a posição ponteiro+offset já foi previamente alocada, retornando o tamanho desta região alocada se sim, 0 se não
+        Verifica, que recebe um ponteiro e um offset, e verifica se a posição ponteiro+offset já foi previamente alocada, retornando o tamanho desta região alocada se sim, 0 se não
 
-__Libera__, similar à free, libera a memória “alocada” em um ponteiro. Repare que ela não recebe o tamanho da região alocada.
+        Libera, similar à free, libera a memória “alocada” em um ponteiro. Repare que ela não recebe o tamanho da região alocada.
 
-__Destrutor*__, que libera as memórias alocadas.
+        Destrutor*, que libera as memórias alocadas.
 
-*Construtor/Destrutor de C++ mesmo.
+        *Construtor/Destrutor de C++ mesmo.
 
-As alocações podem ser de até 65534 bytes, que é o maior unsigned short int.
+        As alocações podem ser de até 65534 bytes, que é o maior unsigned short int.
