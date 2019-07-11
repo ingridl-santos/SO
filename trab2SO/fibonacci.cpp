@@ -10,7 +10,7 @@ int main() {
     int fibnumber[100],i,j,n;
     printf("Please Enter the series limit\n");
     scanf("%d",&n);
-        #pragma omp parallel num_threads(4) 
+        #pragma omp parallel num_threads(2) 
         #pragma omp critical
         if(omp_get_thread_num()==0) {
             printf("There are %d threads\n", omp_get_num_threads());
