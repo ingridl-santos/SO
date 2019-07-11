@@ -34,46 +34,46 @@ void floydWarshallParalelo() {
 	//Floyd-Warshall
 	for(int k = 0; k < n; k++) {
 		#pragma omp parallel for
-		for(int i = 0; i < n; i++) {
-			for(int j = 0; j < n; j++) {
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
 				dist[i][j] = min( dist[i][j], dist[i][k] + dist[k][j] );
+                
             }
         }
 	}
 }
 
 void floydWarshallNaoParalelo() {
-	//Inicializa matriz dist
-	for(int i=0; i<n; i++) {
-		for(int j=0; j<n; j++) {
-			if(i!=j) {
+	//Initialize dist matrix
+	for(int i=0; i<n; i++)
+		for(int j=0; j<n; j++)
+		{
+			if(i!=j){
 				dist[i][j] = i*j + (j-i)*(j-i);
-            }
-			else{
+			} else{
 				dist[i][j]=0;
-            }
+			}
 		}
-    }
 
-	for(int k = 0; k < n; k++) {
-		for(int i = 0; i < n; i++) {
-			for(int j = 0; j < n; j++) {
+	for(int k = 0; k < n; k++){
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
 				dist[i][j] = min( dist[i][j], dist[i][k] + dist[k][j] );
-            }
-        }
-    }
+			}
+		}
+	}
 }
 
 int main() {
 	double w_timer;
 
-	//Versao paralelo
+	//Parallel version
 	w_timer = omp_get_wtime();
 	floydWarshallParalelo();
 	w_timer = (double)omp_get_wtime() - w_timer;
 	cout<<"\nAlgoritmo Floyd-Warshall Paralelizado: "<<w_timer<<"s";
 
-	//Versao nao paralela
+	//Non parallel version
 	w_timer = omp_get_wtime();
 	floydWarshallNaoParalelo();
 	w_timer = (double)omp_get_wtime() - w_timer;
