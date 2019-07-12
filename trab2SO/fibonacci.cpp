@@ -21,7 +21,7 @@ int main() {
         } else {
             printf("Thread %d Printing numbers..\n", omp_get_thread_num());
             for(j=0;j<n;j++){
-                printf("%d\n", fibnumber[j]);
+                printf("%d\t", fibnumber[j]);
             }
         }
     
